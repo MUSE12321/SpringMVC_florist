@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.lingnan.mapper.UserMapper">
+
+    <!--登录-->
+    <select id="login" parameterType="User" resultType="User">
+        select * from user
+        <where>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="count != null and count != ''">
+                and count = #{count}
+            </if>
+            <if test="regDate != null and regDate != ''">
+                and reg_date = #{reg_date}
+            </if>
+            <if test="lastLoginDate != null and lastLoginDate != ''">
+                and last_login_date = #{last_login_date}
+            </if>
+        </where>
+    </select>
+
+    <!--查询所有-->
+    <select id="getList" resultType="User">
+        select * from user
+    </select>
+
+    <select id="getById" resultType="User">
+        select * from user
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <select id="getByKeys" resultType="User">
+        select * from user where concat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account != null and account != ''">
+                account,
+            </if>
+            <if test="password != null and password != ''">
+                password ,
+            </if>
+            <if test="name != null and name != ''">
+                name ,
+            </if>
+            <if test="age != null and age != ''">
+                age ,
+            </if>
+            <if test="sex != null and sex != ''">
+                sex ,
+            </if>
+            <if test="phone != null and phone != ''">
+                phone ,
+            </if>
+            <if test="email != null and email != ''">
+                email ,
+            </if>
+            <if test="address != null and address != ''">
+                address ,
+            </if>
+            <if test="count != null and count != ''">
+                count ,
+            </if>
+            <if test="regDate != null and regDate != ''">
+                reg_date ,
+            </if>
+            <if test="lastLoginDate != null and lastLoginDate != ''">
+                last_login_date ,
+            </if>
+        </trim>
+
+    </select>
+
+    <select id="userCenter">
+        select * from user where account = #{account}
+    </select>
+
+    <select id="getByAccount" resultType="User">
+        select * from user where account = #{account};
+    </select>
+
+    <insert id="insert">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="regDate == null">
+                reg_date,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account!=null">
+                #{account},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="regDate==null">
+                now(),
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="User">
+        delete from user
+        <where>
+            id = #{id}
+        </where>
+    </delete>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="account != null and account != ''">
+                account = #{account}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="lastLoginDate != null and lastLoginDate != ''">
+                and last_login_date = #{last_login_date}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

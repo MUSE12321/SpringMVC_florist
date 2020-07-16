@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.lingnan.mapper.OrderformMapper">
+
+
+    <select id="getById" resultType="Orderform">
+        select * from orderform where id = #{id};
+    </select>
+
+    <!--前台：我的全部订单-->
+    <select id="getByUserId" resultType="Orderform">
+        select *  from orderform where user_id = #{userId}
+    </select>
+
+    <!--前端模糊查询-->
+    <!--订单编号，商品名-->
+<select id="select" resultType="Orderform">
+    select *  from  orderform where  user_id=#{userId} and (num LIKE CONCAT(CONCAT('%',#{num}),'%') OR name LIKE CONCAT(CONCAT('%',#{name}),'%'))
+</select>
+
+    <!--前台：按状态查询我的订单-->
+    <select id="getByStatus" resultType="Orderform">
+        select * from  orderform where  status =#{status} and user_id=#{userId}
+    </select>
+
+    <select id="getByBean" resultType="Orderform">
+        select * from orderform
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="name!=null">
+                and name like '%CampusOnlineFloristSystem%'
+            </if>
+            <if test="userId!=null">
+                and user_id like '%${userId}%'
+            </if>
+        </where>
+    </select>
+
+    <!--后台全部订单-->
+    <select id="getList" resultType="Orderform">
+       select * from orderform;
+   </select>
+
+<!--后台模糊查询-->
+    <!--订单编号，商品名，用户编号，状态-->
+    <select id="backSelect" resultType="Orderform">
+    select *  from  orderform
+    where num like '%${key}%'
+    or  user_id like '%${key}%'
+    or  status like '%${key}%'
+    or name like '%${key}%'
+
+</select>
+
+    <!--test="对应jsp中name字段！=null"
+           数据库字段 = #{服务器字段}
+    -->
+    <!--后台修改订单-->
+    <update id="update">
+        update orderform
+        <set>
+            <trim suffixOverrides=",">
+                <if test="conName != null ">
+                    con_name = #{conName},
+                </if>
+                <if test="conSex != null ">
+                   con_sex =  #{conSex},
+                </if>
+                <if test="conPhone != null">
+                    con_phone = #{conPhone},
+                </if>
+                <if test="address != null">
+                    address = #{address},
+                </if>
+                <if test="status != null">
+                    status = #{status},
+                </if>
+                <if test="remark != null">
+                    remark = #{remark},
+                </if>
+            </trim>
+        </set>
+        where  id = #{id}
+    </update>
+
+    <!--后台更新订单状态-->
+    <update id="updateStatus">
+        update orderform set status =#{status} where id=#{id}
+    </update>
+    <!--后台删除订单-->
+<delete id="delete">
+    delete from orderform where id = #{id}
+</delete>
+
+
+    <insert id="insert" >
+        insert into orderform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="user_id != null">
+                user_id,
+            </if>
+            <if test="conName != null">
+                con_name,
+            </if>
+            <if test="conSex != null">
+                con_sex,
+            </if>
+            <if test="conPhone != null">
+                con_phone,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="ordDate != null">
+                ord_date,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+        </trim>
+        value
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="num != null">
+                #{num},
+            </if>
+            <if test="userId != null">
+                #{user_id},
+            </if>
+            <if test="conName != null">
+                #{con_name},
+            </if>
+            <if test="conSex != null">
+                #{con_sex},
+            </if>
+            <if test="conPhone != null">
+                #{con_phone},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+            <if test="ordDate != null">
+                #{ord_date},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="totalAmount != null">
+                #{total_amount},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

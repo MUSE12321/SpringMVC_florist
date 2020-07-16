@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.mapper.FlowerMapper">
+
+    <select id="getByBean" resultType="Flower">
+        select * from flower
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="name!=null">
+                and name like '%CampusOnlineFloristSystem%'
+            </if>
+            <if test="type!=null">
+                and type like '%${type}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="getByName" resultType="Flower">
+        select * from flower where name like '%CampusOnlineFloristSystem%'
+    </select>
+
+    <select id="selectByName" resultType="Flower">
+        select * from flower where name = #{name}
+    </select>
+
+    <select id="getById" resultType="Flower">
+        select * from flower where id = #{id}
+    </select>
+
+    <select id="getByKeys" resultType="Flower">
+        select * from flower where concat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="type!=null">
+                type,
+            </if>
+            <if test="floMean!=null">
+                flo_mean,
+            </if>
+        </trim>
+        like '%${keys}%'
+    </select>
+
+    <select id="getList" resultType="Flower">
+        select * from flower
+    </select>
+
+    <insert id="insertFlower">
+        insert into flower
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="type!=null">
+                type,
+            </if>
+            <if test="stock!=null">
+                stock,
+            </if>
+            <if test="price!=null">
+                price,
+            </if>
+            <if test="floMean!=null">
+                flo_mean,
+            </if>
+            <if test="photo!=null">
+                photo,
+            </if>
+        </trim>
+            values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="type!=null">
+                #{type},
+            </if>
+            <if test="stock!=null">
+                #{stock},
+            </if>
+            <if test="price!=null">
+                #{price},
+            </if>
+            <if test="floMean!=null">
+                #{floMean},
+            </if>
+            <if test="photo!=null">
+                #{photo},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById">
+        delete from flower where id = #{id}
+    </delete>
+
+    <update id="updateById">
+        update flower set
+        <trim suffixOverrides=",">
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="type!=null">
+                type=#{type},
+            </if>
+            <if test="stock!=null">
+                stock=#{stock},
+            </if>
+            <if test="price!=null">
+                price=#{price},
+            </if>
+            <if test="floMean!=null">
+                flo_mean=#{floMean},
+            </if>
+            <if test="photo!=null">
+                photo=#{photo},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+</mapper>

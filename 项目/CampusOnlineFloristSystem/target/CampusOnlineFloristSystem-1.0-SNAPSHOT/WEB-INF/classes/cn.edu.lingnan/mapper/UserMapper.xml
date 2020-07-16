@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.mapper.UserMapper">
+
+    <!--查询账户和密码-->
+    <select id="loginByAP" resultType="User">
+        select  * from user where account = #{account} and password = #{password}
+    </select>
+
+    <!--查询电话和密码-->
+    <select id="loginByTP" resultType="User">
+        select  * from user where phone = #{phone} and password = #{password}
+    </select>
+
+    <!--查询邮箱和密码-->
+    <select id="loginByEP" resultType="User">
+        select  * from user where email = #{email} and password = #{password}
+    </select>
+
+    <!--查询所有-->
+    <select id="queryList" resultType="User">
+        select * from user
+    </select>
+
+</mapper>

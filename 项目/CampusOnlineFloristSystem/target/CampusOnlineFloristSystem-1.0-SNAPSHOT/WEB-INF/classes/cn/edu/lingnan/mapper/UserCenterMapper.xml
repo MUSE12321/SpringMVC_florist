@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.lingnan.mapper.UserCenterMapper">
+
+    <select id="userCenter">
+        select * from user where account = #{account}
+    </select>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="account != null and account != ''">
+                account = #{account},
+            </if>
+            <if test="password != null and password != ''">
+                 password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                 name = #{name},
+            </if>
+            <if test="age != null and age != ''">
+                 age = #{age},
+            </if>
+            <if test="sex != null and sex != ''">
+                 sex = #{sex},
+            </if>
+            <if test="phone != null and phone != ''">
+                 phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                 email = #{email},
+            </if>
+            <if test="address != null and address != ''">
+                 address = #{address},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

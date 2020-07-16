@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.mapper.CommentMapper">
+
+    <select id="getList" resultType="Comment">
+        select * from comment
+    </select>
+
+    <select id="getByUserId" resultType="Comment">
+        select * from comment where user_id = #{userId}
+    </select>
+
+    <select id="getByOrderId" resultType="Comment">
+        select * from comment where order_id = #{orderId}
+    </select>
+
+    <select id="getByFlowerId" resultType="Comment">
+        select * from comment where flo_id = #{floId}
+    </select>
+
+    <select id="getByBean" resultType="Comment">
+        select * from comment
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="userId!=null">
+                and user_id = #{userId}
+            </if>
+            <if test="loginName!=null">
+                and login_name = #{loginName}
+            </if>
+            <if test="floId!=null">
+                and flo_id = #{floId}
+            </if>
+            <if test="orderId!=null">
+                and order_id = #{orderId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getByKeys" resultType="Comment">
+        select * from comment where concat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginName!=null">
+                login_name,
+            </if>
+            <if test="comment!=null">
+                comment,
+            </if>
+        </trim>
+        like '%${keys}%'
+    </select>
+
+    <insert id="addComment">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="userId!=null">
+                user_id,
+            </if>
+            <if test="loginName!=null">
+                login_name,
+            </if>
+            <if test="floId!=null">
+                flo_id,
+            </if>
+            <if test="orderId!=null">
+                order_id,
+            </if>
+            <if test="date!=null">
+                date,
+            </if>
+            <if test="comment!=null">
+                comment,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+            <if test="loginName!=null">
+                #{loginName},
+            </if>
+            <if test="floId!=null">
+                #{floId},
+            </if>
+            <if test="orderId!=null">
+                #{orderId},
+            </if>
+            <if test="date!=null">
+                #{date},
+            </if>
+            <if test="comment!=null">
+                #{comment},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById">
+        delete from comment where id = #{id}
+    </delete>
+
+    <update id="updateById">
+        update comment set
+        <trim suffixOverrides=",">
+            <if test="name!=null">
+                user_id=#{userId},
+            </if>
+            <if test="loginName!=null">
+                login_name=#{loginName},
+            </if>
+            <if test="floId!=null">
+                flo_id=#{floId},
+            </if>
+            <if test="orderId!=null">
+                order_id=#{orderId},
+            </if>
+            <if test="date!=null">
+                date=#{date},
+            </if>
+            <if test="comment!=null">
+                comment=#{comment},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+</mapper>
