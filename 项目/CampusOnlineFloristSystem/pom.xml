@@ -36,7 +36,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
     <junit.version>4.11</junit.version>
     <mysql.version>8.0.16</mysql.version>
-    <spring.version>5.2.2.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
     <mybatis.version>3.5.3</mybatis.version>
     <mybatis.spring.version>2.0.3</mybatis.spring.version>
     <spring.jdbc.version>5.2.2.RELEASE</spring.jdbc.version>
